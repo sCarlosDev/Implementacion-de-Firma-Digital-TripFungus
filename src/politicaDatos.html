@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Datos y Firma | TripFungus</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 1. Librería jsPDF para generación de PDF en el cliente (NUEVO) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        /* Configuración de color para un tema natural (verde/tierra) */
+        :root {
+            --color-primary: #65a30d; /* Lima-verde fuerte */
+            --color-secondary: #ca8a04; /* Marrón-oro */
+            --color-text: #1f2937; /* Gris oscuro */
+        }
+
+        /* Utilidades personalizadas para el tema TripFungus */
+        .bg-primary { background-color: var(--color-primary); }
+        .text-primary { color: var(--color-primary); }
+        .hover-bg-secondary:hover { background-color: var(--color-secondary); }
+        .border-secondary { border-color: var(--color-secondary); }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--color-text);
+        }
+        
+        #signatureCanvas {
+            border: 2px solid var(--color-primary); 
+            cursor: crosshair;
+            background-color: #ffffff;
+            touch-action: none; /* Mejor manejo táctil */
+        }
+
+        /* Estilos específicos para la sección de contenido legal */
+        .legal-content {
+            border-left: 4px solid var(--color-secondary);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 antialiased">
+
+    <!-- CABECERA y NAVEGACIÓN -->
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <!-- Logo y Nombre de la Agencia -->
+            <div class="flex items-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 2a8 8 0 100 16A8 8 0 0010 2zm0 14a6 6 0 100-12 6 6 0 000 12zM9 9a1 1 0 00-1 1v2a1 1 0 102 0v-2a1 1 0 00-1-1zm3 0a1 1 0 00-1 1v2a1 1 0 102 0v-2a1 1 0 00-1-1z" clip-rule="evenodd" />
+                    <path d="M10 3a1 1 0 00-1 1v1a1 1 0 102 0V4a1 1 0 00-1-1z" />
+                </svg>
+                <span class="text-2xl font-extrabold text-gray-900">TripFungus</span>
+            </div>
+            <!-- Enlace de inicio simulado -->
+            <a href="index.html" class="text-gray-600 hover:text-primary transition duration-150 font-medium">Volver a Inicio</a>
+        </div>
+    </header>
+
+    <main class="py-12 md:py-16">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-8 text-gray-900 text-center border-b pb-4 border-primary">
+                Política de Privacidad y Datos
+            </h1>
+
+            <div class="bg-white p-8 rounded-xl shadow-lg space-y-8">
+                
+                <p class="text-sm text-gray-500 italic">
+                    Última actualización: 1 de enero de 2025
+                </p>
+
+                <!-- 1. Contenido Legal de la Política -->
+                <section class="space-y-6 legal-content p-4 rounded-lg bg-gray-50">
+                    <h2 class="text-2xl font-bold mb-3 text-primary">1. Información que Recopilamos</h2>
+                    <p class="mb-4">
+                        Recopilamos información limitada necesaria para gestionar sus reservas y mejorar su experiencia de viaje:
+                    </p>
+                    <ul class="list-disc list-inside space-y-1 ml-4 text-gray-700">
+                        <li><strong>Datos de Contacto</strong>: Nombre, dirección de correo electrónico y número de teléfono (proporcionados en el formulario de contacto).</li>
+                        <li><strong>Datos de Reserva</strong>: Preferencias de ruta, fechas de viaje y número de participantes.</li>
+                        <li><strong>Datos de Uso</strong>: Información no personal sobre cómo interactúa con nuestro sitio web (navegador, tiempo de visita).</li>
+                    </ul>
+
+                    <h2 class="text-2xl font-bold mb-3 text-primary pt-4">2. Uso de la Información</h2>
+                    <p class="mb-4 text-gray-700">
+                        Utilizamos la información recopilada exclusivamente para los siguientes fines:
+                    </p>
+                    <ul class="list-disc list-inside space-y-1 ml-4 text-gray-700">
+                        <li>Procesar y confirmar su reserva de viajes y talleres.</li>
+                        <li>Responder a sus consultas y proporcionar soporte al cliente.</li>
+                        <li>Enviar comunicaciones sobre su viaje (no marketing, a menos que se suscriba).</li>
+                        <li>Mejorar la funcionalidad y el contenido de nuestro sitio web.</li>
+                    </ul>
+
+                    <h2 class="text-2xl font-bold mb-3 text-primary pt-4">3. Compartición de Datos</h2>
+                    <p class="text-gray-700">
+                        TripFungus no vende ni alquila sus datos personales a terceros. Solo compartimos su información con socios de servicios (por ejemplo, hoteles o guías locales) estrictamente para completar los servicios que usted ha solicitado.
+                    </p>
+
+                    <h2 class="text-2xl font-bold mb-3 text-primary pt-4">4. Sus Derechos</h2>
+                    <p class="text-gray-700">
+                        Usted tiene derecho a acceder, rectificar o solicitar la eliminación de sus datos personales. Para ejercer estos derechos, por favor, póngase en contacto con nosotros a través de la sección de contacto en la página principal.
+                    </p>
+                </section>
+                
+                <!-- 5. Módulo de Aceptación y Firma Digital (Sin Persistencia) -->
+                <section class="border-t border-gray-200 pt-8 mt-8 space-y-6">
+                    <h2 class="text-2xl font-bold text-gray-800">Aceptación Explícita y Firma Digital</h2>
+
+                    <!-- Declaración resumida -->
+                    <div class="p-4 bg-yellow-50 border border-yellow-300 rounded-lg text-sm text-gray-800">
+                        <p class="font-semibold mb-2">Declaración de Consentimiento:</p>
+                        <p>Yo, el/la abajo firmante, <strong id="clientNameDisplay" class="text-primary font-extrabold">CLIENTE</strong>, declaro haber leído, comprendido y aceptado las condiciones de la Política de Privacidad y Protección de Datos de <strong class="text-primary font-extrabold">TripFungus</strong> mencionadas arriba.</p>
+                        <p class="mt-2 font-semibold text-xs text-red-600">Esta firma digital constituye mi consentimiento explícito e inequívoco.</p>
+                    </div>
+
+                    <!-- Entrada de Nombre del Cliente -->
+                    <div class="mt-4">
+                        <label for="clientNameInput" class="block text-sm font-medium text-gray-700">
+                            Nombre Completo del Cliente:
+                        </label>
+                        <input type="text" id="clientNameInput" placeholder="Escriba el nombre completo del cliente"
+                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm">
+                    </div>
+
+                    <!-- Captura de Firma -->
+                    <div class="flex flex-col space-y-2">
+                        <label class="block text-sm font-medium text-gray-700">Firme Manuscritamente Aquí (Use el dedo o un lápiz óptico):</label>
+                        <canvas id="signatureCanvas" class="rounded-lg shadow-md"></canvas>
+                    </div>
+
+                    <!-- Botones de Acción -->
+                    <div class="flex justify-between items-center mt-6">
+                        <button id="clearButton" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-300 transition duration-150">
+                            Borrar Firma
+                        </button>
+                        <button id="saveButton" class="px-6 py-3 bg-primary text-white rounded-lg font-bold shadow-lg hover-bg-secondary transition duration-150 transform hover:scale-105" disabled>
+                            Firmar y Aceptar Documento
+                        </button>
+                    </div>
+                    
+                    <!-- Mensaje de estado -->
+                    <div id="messageBox" class="mt-4 p-3 rounded-lg text-center hidden"></div>
+                </section>
+                
+            </div>
+        </div>
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
+            <p>&copy; 2025 TripFungus. Todos los derechos reservados.</p>
+            <p class="mt-2 text-gray-400">Diseño centrado en la naturaleza y la aventura.</p>
+        </div>
+    </footer>
+
+    <!-- Lógica JavaScript (Sin Firebase, con jsPDF) -->
+    <script>
+        // --------------- ELEMENTOS DOM
+        const canvas = document.getElementById('signatureCanvas');
+        const ctx = canvas.getContext('2d');
+        const clientNameInput = document.getElementById('clientNameInput');
+        const saveButton = document.getElementById('saveButton');
+        const clearButton = document.getElementById('clearButton');
+        const messageBox = document.getElementById('messageBox');
+
+        let painting = false;
+        let initialDataURL = null; // Para verificar si el canvas está en blanco
+
+        // -----------------------------------------------------
+        // 1. UTILIDADES Y CONFIGURACIÓN INICIAL
+        // -----------------------------------------------------
+
+        function showMessage(text, isError = false) {
+            messageBox.textContent = text;
+            messageBox.className = `mt-4 p-3 rounded-lg text-center ${isError ? 'bg-red-500 text-white' : 'bg-green-600 text-white'}`;
+            messageBox.classList.remove('hidden');
+            setTimeout(() => messageBox.classList.add('hidden'), 5000);
+        }
+
+        function initializeCanvas() {
+            // Ajustar el tamaño del canvas al contenedor (responsive)
+            const containerWidth = canvas.parentElement.clientWidth;
+            canvas.width = containerWidth;
+            canvas.height = 150; 
+
+            // Rellenar el fondo con blanco y configurar el lápiz
+            ctx.fillStyle = "white";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.strokeStyle = '#000000';
+            ctx.lineWidth = 2;
+            ctx.lineCap = 'round';
+            
+            // Capturar la URL inicial para la verificación de lienzo en blanco
+            initialDataURL = canvas.toDataURL(); 
+
+            // Event Listeners
+            canvas.addEventListener('mousedown', startPosition);
+            canvas.addEventListener('mouseup', endPosition);
+            canvas.addEventListener('mousemove', draw);
+            
+            canvas.addEventListener('touchstart', startPosition);
+            canvas.addEventListener('touchend', endPosition);
+            canvas.addEventListener('touchmove', draw);
+            
+            clearButton.addEventListener('click', clearCanvas);
+            clientNameInput.addEventListener('input', toggleSaveButton);
+            clientNameInput.addEventListener('input', updateClientNameDisplay);
+            // Llamar a la función que ahora genera el PDF
+            saveButton.addEventListener('click', generatePdfAndSave); 
+        }
+        
+        function updateClientNameDisplay() {
+             const name = clientNameInput.value.trim();
+             document.getElementById('clientNameDisplay').textContent = name || 'CLIENTE';
+        }
+
+        // -----------------------------------------------------
+        // 2. LÓGICA DE FIRMA
+        // -----------------------------------------------------
+
+        function isCanvasBlank() {
+            return canvas.toDataURL() === initialDataURL;
+        }
+
+        function toggleSaveButton() {
+            const name = clientNameInput.value.trim();
+            const isBlank = isCanvasBlank();
+            
+            if (name !== '' && !isBlank) {
+                saveButton.disabled = false;
+            } else {
+                saveButton.disabled = true;
+            }
+        }
+
+        function getTouchPos(canvasDom, touchEvent) {
+            const rect = canvasDom.getBoundingClientRect();
+            return {
+                x: touchEvent.touches[0].clientX - rect.left,
+                y: touchEvent.touches[0].clientY - rect.top
+            };
+        }
+
+        function startPosition(e) {
+            painting = true;
+            draw(e);
+        }
+
+        function endPosition() {
+            painting = false;
+            ctx.beginPath();
+            toggleSaveButton();
+        }
+
+        function draw(e) {
+            if (!painting) return;
+
+            e.preventDefault(); 
+
+            let currentX, currentY;
+
+            if (e.touches) {
+                const pos = getTouchPos(canvas, e);
+                currentX = pos.x;
+                currentY = pos.y;
+            } else {
+                currentX = e.offsetX;
+                currentY = e.offsetY;
+            }
+
+            ctx.lineTo(currentX, currentY);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(currentX, currentY);
+            
+            toggleSaveButton();
+        }
+
+        function clearCanvas() {
+            ctx.fillStyle = "white";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.beginPath();
+            clientNameInput.value = '';
+            updateClientNameDisplay();
+            toggleSaveButton();
+            showMessage("Firma borrada. Ingrese el nombre de nuevo y firme.", false);
+        }
+
+        // -----------------------------------------------------
+        // 3. LÓGICA DE GENERACIÓN DE PDF (NUEVO)
+        // -----------------------------------------------------
+
+        async function generatePdfAndSave() {
+            // Verificar dependencias
+            if (typeof window.jspdf === 'undefined') {
+                 showMessage("Error: La librería jsPDF no está cargada. No se puede generar el PDF.", true);
+                 return;
+            }
+
+            const clientName = clientNameInput.value.trim();
+            const signatureDataURL = canvas.toDataURL('image/png'); // Firma en Base64
+            const today = new Date().toLocaleDateString('es-ES');
+
+            if (!clientName || isCanvasBlank()) {
+                showMessage("Por favor, ingrese el nombre y dibuje la firma antes de firmar.", true);
+                return;
+            }
+
+            saveButton.disabled = true;
+            saveButton.textContent = 'Generando PDF...';
+
+            try {
+                // Inicializar jsPDF
+                const { jsPDF } = window.jspdf;
+                // Crear un nuevo documento A4 en mm
+                const doc = new jsPDF(); 
+                
+                const pageWidth = doc.internal.pageSize.getWidth();
+                const marginX = 20;
+
+                // --- Contenido del PDF ---
+
+                // 1. Título
+                doc.setFontSize(20);
+                doc.setFont('helvetica', 'bold');
+                doc.text("Aceptación de Política de Datos - TripFungus", pageWidth / 2, 20, { align: 'center' });
+
+                // 2. Información de Registro
+                doc.setFontSize(12);
+                doc.setFont('helvetica', 'normal');
+                doc.text(`Cliente: ${clientName}`, marginX, 40);
+                doc.text(`Fecha de Aceptación: ${today}`, marginX, 47);
+                doc.text(`Hora de Registro: ${new Date().toLocaleTimeString('es-ES')}`, marginX, 54);
+
+                // 3. Declaración
+                doc.setFontSize(10);
+                const declaration = "El cliente declara haber leído y aceptado explícitamente la Política de Privacidad y Datos de TripFungus, tal como se presenta en el sitio web.";
+                doc.text(declaration, marginX, 64);
+                
+                // 4. Agregar la firma como imagen
+                const imgWidth = canvas.width;
+                const imgHeight = canvas.height;
+                
+                // Calcular relación de aspecto para que la firma quepa en el PDF
+                const ratio = imgHeight / imgWidth;
+                const pdfImgWidth = pageWidth - (2 * marginX); 
+                const pdfImgHeight = pdfImgWidth * ratio; 
+                
+                const yPosSignature = 80;
+
+                doc.setFontSize(14);
+                doc.setFont('helvetica', 'bold');
+                doc.text("Firma Digital:", marginX, yPosSignature - 10);
+                
+                // Agregar la imagen de la firma (Base64)
+                doc.addImage(signatureDataURL, 'PNG', marginX, yPosSignature, pdfImgWidth, pdfImgHeight);
+                
+                // 5. Guardar y descargar el archivo
+                const filename = `Aceptacion_Datos_${clientName.replace(/\s/g, '_')}_${today.replace(/\//g, '-')}.pdf`;
+                doc.save(filename);
+
+                // Mensaje y limpieza
+                showMessage(`¡PDF de Aceptación de la firma de ${clientName} generado y descargado! Busque el archivo '${filename}' en su carpeta de descargas.`, false);
+                
+                // Limpiar el lienzo y los campos
+                clearCanvas();
+                
+            } catch (error) {
+                console.error("Error al generar el PDF:", error);
+                showMessage("Error al generar el PDF. Asegúrese de que la librería jsPDF esté cargada.", true);
+            } finally {
+                // Asegurarse de restaurar el botón
+                saveButton.textContent = 'Firmar y Aceptar Documento';
+                toggleSaveButton();
+            }
+        }
+
+        // -----------------------------------------------------
+        // 4. INICIALIZACIÓN
+        // -----------------------------------------------------
+
+        window.onload = function() {
+            initializeCanvas();
+            // Asegurarse de que el botón de guardar esté deshabilitado al inicio
+            toggleSaveButton(); 
+        };
+
+        // Escucha de eventos de redimensionamiento para que el canvas sea siempre responsive
+        window.addEventListener('resize', initializeCanvas);
+
+    </script>
+</body>
+</html>
