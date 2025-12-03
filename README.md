@@ -75,3 +75,5 @@ Despues de hacer el 'merge' de todo, el código y la documentación se organizan
 │   ├── investigacion.md   # Comparativa de herramientas de mercado
 │   └── decision.md        # Justificación del desarrollo propio
 └── README.md              # Este archivo
+
+## LINK DE LA PÁGINA DE TRIPFUNGUS 🍄🍄‍🟫: https://scarlosdev.github.io/Implementacion-de-Firma-Digital-TripFungus/src/
