@@ -43,7 +43,6 @@ Para la gestión del proyecto hemos seguido una metodología ágil utilizando la
     * `investigacion`: Rama utilizada para la comparativa de software.
     * `desarrollo`: Rama donde se ha programado el código fuente de la web.
     * `documentacion`: Rama para la redacción de manuales y justificaciones.
-    * 
 ---
 
 ## 📂 Estructura del Repositorio y Ramas
@@ -53,30 +52,26 @@ Así es como se organiza nuestro código según su rama de origen:
 
 ```text
 /
-├── src/                  # (Rama 'desarrollo') Código fuente de la web
+├── src/                   # (Rama 'desarrollo') Código fuente de la web
 │   ├── index.html
-│   ├── styles.css
-│   └── app.js
-│
-├── docs/                 # Documentación del proyecto
-│   ├── investigacion.md  # (Rama 'investigacion') Comparativa de herramientas
-│   └── decision.md       # (Rama 'documentacion') Justificación técnica
-│
-├── evidencias/           # (Rama 'main/desarrollo') Capturas finales
-│
-└── README.md             # (Rama 'main') Visión general del proyecto
+│   └── politicaDatos.html # Implementación de la Firma digital
+├── docs/                  # Documentación del proyecto
+│   ├── investigacion.md   # (Rama 'investigacion') Comparativa de herramientas
+│   └── decision.md        # (Rama 'documentacion') Justificación técnica
+└── README.md              # (Rama 'main') Visión general del proyecto
 ```
 
 ---
 
 ## 📂 Estructura Final del Repositorio
-El código y la documentación se organizan de la siguiente manera:
+Despues de hacer el 'merge' de todo, el código y la documentación se organizan de la siguiente manera:
 
 ```text
 /
-├── src/                  # Código fuente de la página web (HTML, CSS, JS)
-├── docs/                 # Documentación del proyecto
-│   ├── investigacion.md  # Comparativa de herramientas de mercado
-│   └── decision.md       # Justificación del desarrollo propio
-├── evidencias/           # Capturas de pantalla y ejemplos
-└── README.md             # Este archivo
+├── src/                   # (Rama 'desarrollo') Código fuente de la web
+│   ├── index.html
+│   └── politicaDatos.html # Implementación de la Firma digital
+├── docs/                  # Documentación del proyecto
+│   ├── investigacion.md   # Comparativa de herramientas de mercado
+│   └── decision.md        # Justificación del desarrollo propio
+└── README.md              # Este archivo
